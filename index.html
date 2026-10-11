@@ -1,58 +1,278 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AMpireGames</title>
+<title>AMpire Games</title>
+<meta name="description" content="AMpire Games – Indie-Studio. Erstes Spiel: Zombie Horde: Cannon Commander.">
+<meta name="theme-color" content="#1c1829">
+<meta property="og:title" content="AMpire Games">
+<meta property="og:description" content="Zombie Horde: Cannon Commander – schieß dich durch die Mauern der Armee.">
+<meta property="og:image" content="https://ampiregames.github.io/img/ampire-header.jpg">
+<link rel="icon" type="image/png" href="img/ampire-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  body { font: 16px/1.6 system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; color: #1b1420; background: #fff; }
-  h1 { font-size: 1.8em; } h2 { margin-top: 2em; border-bottom: 2px solid #7cd321; }
-  .langs { text-align: right; } .langs a { margin-left: 1em; font-weight: bold; }
-  .js [data-lang] { display: none; } .js[data-show="de"] [data-lang="de"], .js[data-show="en"] [data-lang="en"] { display: block; }
-  [data-lang="en"] { border-top: 3px solid #7cd321; margin-top: 3em; padding-top: 1em; } .js [data-lang="en"] { border: 0; margin: 0; padding: 0; }
-  @media (prefers-color-scheme: dark) { body { color: #f4efe4; background: #1a0f1f; } a { color: #b6ff3b; } }
+  :root { --bg: #1c1829; --card: #262138; --ink: #f6efe3; --soft: #e4dccd; --muted: #bdb5cc; --yellow: #efbb3c; --yellow-d: #b87300; --green: #57d77c; --green-d: #1e9648; --pink: #f472a6; --pink-d: #b0366a; --lime: #a6ff2e; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 18px/1.6 "Nunito", system-ui, sans-serif; overflow-x: hidden; }
+  h1, h2, h3, p, ul, figure { margin: 0; }
+  a { color: var(--green); }
+  a:hover { color: #8af0a5; }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+  .eyebrow { font: 600 15px "Fredoka", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
+
+  /* Navigation */
+  header.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 20px; padding-bottom: 20px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font: 700 24px "Fredoka", sans-serif; letter-spacing: .5px; }
+  .logo:hover { color: var(--ink); }
+  .logo img { width: 48px; height: 48px; border-radius: 14px; }
+  nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font: 600 18px "Fredoka", sans-serif; }
+  nav a { color: var(--ink); text-decoration: none; padding: 10px 0; }
+  nav a:hover { color: var(--yellow); }
+  .langs { display: flex; gap: 4px; background: var(--card); padding: 4px; border-radius: 999px; }
+  .langs button { font: 600 15px "Fredoka", sans-serif; color: var(--ink); background: none; border: 0; padding: 6px 14px; min-height: 36px; border-radius: 999px; cursor: pointer; }
+  .langs button[aria-pressed="true"] { background: var(--yellow); color: var(--bg); }
+
+  /* Hero */
+  .hero { position: relative; text-align: center; padding-top: 72px; padding-bottom: 112px; }
+  .deco { position: absolute; border-radius: 28%; }
+  .d1 { left: 2%; top: 40px; width: 76px; height: 76px; background: var(--yellow); box-shadow: 0 8px 0 var(--yellow-d); transform: rotate(-14deg); }
+  .d2 { right: 4%; top: 90px; width: 56px; height: 56px; background: var(--green); box-shadow: 0 6px 0 var(--green-d); transform: rotate(12deg); }
+  .d3 { left: 8%; bottom: 40px; width: 48px; height: 48px; background: var(--green); box-shadow: 0 5px 0 var(--green-d); transform: rotate(-18deg); }
+  .d4 { right: 1%; bottom: 20px; width: 88px; height: 88px; background: var(--yellow); box-shadow: 0 9px 0 var(--yellow-d); transform: rotate(10deg); }
+  .wordmark { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font: 700 clamp(64px, 12vw, 128px)/1 "Fredoka", sans-serif; }
+  .key { display: inline-flex; align-items: center; justify-content: center; width: clamp(96px, 17vw, 180px); height: clamp(96px, 17vw, 180px); border-radius: 15%; color: var(--bg); transition: transform .25s; }
+  .key.a { background: var(--yellow); box-shadow: 0 clamp(8px, 1.2vw, 14px) 0 var(--yellow-d); transform: rotate(-6deg); }
+  .key.m { background: var(--green); box-shadow: 0 clamp(8px, 1.2vw, 14px) 0 var(--green-d); transform: rotate(4deg); }
+  .key:hover { transform: rotate(0) translateY(-6px); }
+  .pire { font-size: clamp(72px, 14vw, 150px); margin-left: 8px; }
+  .sub { margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 24px; font: 700 clamp(18px, 3vw, 28px) "Fredoka", sans-serif; letter-spacing: .55em; padding-left: .55em; }
+  .lead { max-width: 620px; margin: 48px auto 0; font-size: clamp(19px, 2.2vw, 24px); color: var(--soft); }
+  .ctas { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; min-height: 56px; padding: 0 32px; border-radius: 18px; font: 700 20px "Fredoka", sans-serif; text-decoration: none; transition: transform .15s; }
+  a.btn:hover { transform: translateY(-3px) rotate(-1deg); }
+  .btn.yellow { background: var(--yellow); color: var(--bg); box-shadow: 0 6px 0 var(--yellow-d); }
+  .btn.yellow:hover { color: var(--bg); }
+  .btn.dark { background: var(--card); color: var(--ink); box-shadow: 0 6px 0 #14111e; font-weight: 600; }
+  .btn.dark:hover { color: var(--ink); }
+  .btn.green { background: var(--green); color: var(--bg); box-shadow: 0 6px 0 var(--green-d); word-break: break-all; }
+  .btn.green:hover { color: var(--bg); }
+
+  /* Spiel */
+  .game-outer { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+  .game { border-radius: 40px; background: #2b1745 radial-gradient(ellipse at 20% 0%, #4b2468 0%, #2b1745 60%); border: 4px solid var(--lime); padding: clamp(28px, 5vw, 64px); overflow: hidden; }
+  .game-top { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+  .game-text { flex: 1 1 380px; min-width: 0; }
+  .game-shot { flex: 1.3 1 420px; min-width: 0; }
+  .badge-row { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .badge-row img { width: 72px; height: 72px; border-radius: 18px; }
+  .game h2 { font: 400 clamp(40px, 6vw, 72px)/1 "Bungee", sans-serif; color: var(--lime); text-shadow: 0 4px 0 var(--bg); }
+  .game .tag { margin-top: 10px; font: 700 clamp(22px, 3vw, 34px) "Fredoka", sans-serif; letter-spacing: .04em; text-transform: uppercase; color: #ffc933; }
+  .game .desc { margin-top: 28px; font-size: 20px; color: #efe7f7; }
+  .chips { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips li { padding: 6px 16px; border-radius: 999px; background: var(--bg); font-weight: 700; font-size: 16px; }
+  .get { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; }
+  .get .soon { background: var(--lime); color: var(--bg); box-shadow: 0 6px 0 #5f9a0a; padding: 0 28px; }
+  .hero-shot { border-radius: 28px; border: 4px solid var(--lime); transform: rotate(1.5deg); box-shadow: 0 24px 48px rgba(0,0,0,.45); }
+  .shots { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 20px; }
+  .shots figure { flex: 1 1 260px; min-width: 0; }
+  .shots img { border-radius: 20px; border: 3px solid var(--bg); }
+  .shots figcaption { margin-top: 10px; font: 600 18px "Fredoka", sans-serif; color: #ffc933; }
+
+  /* Schritte */
+  .steps-wrap { padding-top: 112px; }
+  .steps-wrap h2, .studio h2, .contact h2 { font: 700 clamp(30px, 5vw, 52px)/1.1 "Fredoka", sans-serif; }
+  .steps-wrap h2 { text-align: center; margin-bottom: 40px; }
+  .steps-wrap h2 span + span { color: var(--yellow); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .step { color: var(--bg); border-radius: 28px; padding: 28px; transition: transform .25s; }
+  .step:hover { transform: rotate(0) translateY(-6px) !important; }
+  .step .n { font: 700 56px/1 "Fredoka", sans-serif; }
+  .step h3 { margin: 12px 0 8px; font: 600 24px "Fredoka", sans-serif; }
+  .step p { font-size: 17px; }
+  .s1 { background: var(--yellow); box-shadow: 0 8px 0 var(--yellow-d); transform: rotate(-1.5deg); }
+  .s2 { background: var(--green); box-shadow: 0 8px 0 var(--green-d); transform: rotate(1deg); }
+  .s3 { background: var(--pink); box-shadow: 0 8px 0 var(--pink-d); transform: rotate(-1deg); }
+  .s4 { background: var(--ink); box-shadow: 0 8px 0 #b9ae98; transform: rotate(1.5deg); }
+
+  /* Studio */
+  .studio { max-width: 1000px; margin: 0 auto; padding: 120px 24px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 48px; }
+  .tiles { flex: 0 1 300px; margin: 0 auto; display: flex; gap: 14px; justify-content: center; align-items: flex-end; }
+  .tiles div { width: 120px; height: 120px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font: 700 80px "Fredoka", sans-serif; color: var(--bg); }
+  .tiles .a { background: var(--yellow); box-shadow: 0 8px 0 var(--yellow-d); transform: rotate(-8deg); }
+  .tiles .m { background: var(--green); box-shadow: 0 8px 0 var(--green-d); transform: rotate(5deg); }
+  .studio .txt { flex: 1 1 380px; min-width: 0; }
+  .studio h2 { margin: 8px 0 20px; font-size: clamp(30px, 4.5vw, 46px); }
+  .studio p + p { margin-top: 16px; }
+  .studio .txt p:not(.eyebrow) { color: var(--soft); }
+
+  /* Kontakt */
+  .contact { max-width: 1000px; margin: 0 auto; padding: 120px 24px 96px; }
+  .contact .box { border-radius: 36px; background: var(--card); padding: clamp(28px, 5vw, 56px); text-align: center; }
+  .contact h2 { font-size: clamp(30px, 4.5vw, 46px); margin-bottom: 12px; }
+  .contact p { margin: 0 auto 28px; max-width: 520px; color: var(--soft); }
+
+  footer { border-top: 2px solid #2e2840; padding-top: 32px; padding-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; font-size: 16px; color: var(--muted); }
+  footer .l { display: flex; align-items: center; gap: 10px; font: 600 16px "Fredoka", sans-serif; }
+  footer .l img { width: 32px; height: 32px; border-radius: 9px; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  footer .links a { color: var(--ink); }
+
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+  @media (max-width: 600px) { .deco { opacity: .5; } .sub { letter-spacing: .3em; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .key, .step { transition: none; } }
 </style>
 </head>
 <body>
-<p class="langs" id="langs" hidden><a href="#" data-set="de">Deutsch</a><a href="#" data-set="en">English</a></p>
-
-<div data-lang="en" lang="en">
-<h1>AMpireGames</h1>
-<p>Developer website of Armin Maghsoudloo.</p>
-<h2>Games</h2>
-<h3>Zombie Horde: Cannon Commander</h3>
-<p>Endless launcher for Android: shoot your zombie across the battlefield with the cannon, clear soldiers and walls out of the way and grow your horde.</p>
-<h2>Legal</h2>
-<p><a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#privacy">Privacy Policy</a> ·
-<a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#imprint">Imprint</a></p>
-<p>Contact: <a href="mailto:AMpireGames@gmail.com">AMpireGames@gmail.com</a></p>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top"><img src="img/ampire-logo.png" alt="" width="48" height="48">AMpire Games</a>
+    <nav aria-label="Navigation">
+      <a href="#spiel" data-t="nav_game">Spiel</a>
+      <a href="#studio" data-t="nav_studio">Studio</a>
+      <a href="#kontakt" data-t="nav_contact">Kontakt</a>
+      <span class="langs" role="group" aria-label="Sprache / Language">
+        <button type="button" data-set="de" aria-pressed="true">DE</button>
+        <button type="button" data-set="en" aria-pressed="false">EN</button>
+      </span>
+    </nav>
+  </header>
 </div>
 
-<div data-lang="de" lang="de">
-<h1>AMpireGames</h1>
-<p>Entwickler-Website von Armin Maghsoudloo.</p>
-<h2>Spiele</h2>
-<h3>Zombie Horde: Cannon Commander</h3>
-<p>Endless-Launcher für Android: Schieße deinen Zombie mit der Kanone über das Schlachtfeld, räume Soldaten und Mauern aus dem Weg und baue deine Horde aus.</p>
-<h2>Rechtliches</h2>
-<p><a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#privacy">Datenschutzerklärung</a> ·
-<a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#imprint">Impressum</a></p>
-<p>Kontakt: <a href="mailto:AMpireGames@gmail.com">AMpireGames@gmail.com</a></p>
+<main>
+  <section id="top" class="wrap hero">
+    <div class="deco d1" aria-hidden="true"></div><div class="deco d2" aria-hidden="true"></div>
+    <div class="deco d3" aria-hidden="true"></div><div class="deco d4" aria-hidden="true"></div>
+    <h1 class="wordmark" aria-label="AMpire Games">
+      <span class="key a" aria-hidden="true">A</span><span class="key m" aria-hidden="true">M</span><span class="pire" aria-hidden="true">pire</span>
+    </h1>
+    <div class="sub" aria-hidden="true">
+      <svg width="26" height="40" viewBox="0 0 26 40"><path d="M0 0h26L13 40z" fill="#f472a6"/></svg>GAMES<svg width="26" height="40" viewBox="0 0 26 40"><path d="M0 0h26L13 40z" fill="#f472a6"/></svg>
+    </div>
+    <p class="lead" data-t="lead">Kleine Spiele für kurze Runden: ein Tipp, sofort drin. Gebaut von einem Indie-Studio mit großem Hang zu Explosionen.</p>
+    <div class="ctas">
+      <a class="btn yellow" href="#spiel" data-t="cta_game">Unser erstes Spiel</a>
+      <a class="btn dark" href="#studio" data-t="cta_studio">Über das Studio</a>
+    </div>
+  </section>
+
+  <section id="spiel" class="game-outer">
+    <div class="game">
+      <div class="game-top">
+        <div class="game-text">
+          <div class="badge-row">
+            <img src="img/zombie-icon.png" alt="" width="72" height="72">
+            <span class="eyebrow" data-t="badge">Jetzt neu · Android</span>
+          </div>
+          <h2>Zombie Horde</h2>
+          <p class="tag">Cannon Commander</p>
+          <p class="desc" data-t="desc">Du bist ein Zombie in einer Kanone. Schieß dich übers Schlachtfeld, ramme Soldaten, mach sie zu deiner Horde und durchbrich die Mauern der Armee – alles mit einem einzigen Tipp.</p>
+          <ul class="chips">
+            <li data-t="chip1">Ein-Tipp-Steuerung</li>
+            <li data-t="chip2">Komplett offline</li>
+            <li data-t="chip3">Deutsch &amp; Englisch</li>
+          </ul>
+          <div class="get">
+            <span class="btn soon" data-t="soon">Bald bei Google Play</span>
+          </div>
+        </div>
+        <div class="game-shot">
+          <img class="hero-shot" src="img/shot-01-wall1.jpg" width="1400" height="700" alt="Spielszene: Eine Mauer birst, Combo und Schockwelle" data-t-alt="alt1">
+        </div>
+      </div>
+      <div class="shots">
+        <figure><img src="img/shot-03-snow1.jpg" width="1400" height="700" loading="lazy" alt="Das Eisfeld-Biom" data-t-alt="alt2"><figcaption data-t="cap1">Vier Biome von Militärbasis bis Eisfeld</figcaption></figure>
+        <figure><img src="img/shot-04-mutation.jpg" width="1400" height="700" loading="lazy" alt="Mutationskarten zur Auswahl" data-t-alt="alt3"><figcaption data-t="cap2">Nach jeder Mauer eine Mutation wählen</figcaption></figure>
+        <figure><img src="img/shot-07-skins.jpg" width="1400" height="700" loading="lazy" alt="Zombie-Skins im Mutationslabor" data-t-alt="alt4"><figcaption data-t="cap3">Skins, Upgrades und neue Zombie-Typen</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap steps-wrap">
+    <h2><span data-t="steps_h_a">Kraft. Winkel.</span> <span data-t="steps_h_b">Feuer!</span></h2>
+    <div class="steps">
+      <div class="step s1"><div class="n">1</div><h3 data-t="s1h">Abfeuern</h3><p data-t="s1p">Kraft und Winkel festlegen, dann geht der Zombie auf Reisen.</p></div>
+      <div class="step s2"><div class="n">2</div><h3 data-t="s2h">Infizieren</h3><p data-t="s2p">Jeder getroffene Soldat schließt sich deiner Horde an. Combos lösen den Fieber-Modus aus.</p></div>
+      <div class="step s3"><div class="n">3</div><h3 data-t="s3h">Durchbrechen</h3><p data-t="s3p">Immer größere Mauern, jede fünfte mit Bunker und General.</p></div>
+      <div class="step s4"><div class="n">4</div><h3 data-t="s4h">Mutieren</h3><p data-t="s4p">Karten stapeln, im Labor aufrüsten und jeden Tag eine neue Herausforderung meistern.</p></div>
+    </div>
+  </section>
+
+  <section id="studio" class="studio">
+    <div class="tiles" aria-hidden="true"><div class="a">A</div><div class="m">M</div></div>
+    <div class="txt">
+      <p class="eyebrow" data-t="studio_eyebrow">Das Studio</p>
+      <h2 data-t="studio_h">Klein, unabhängig, mit Spaß am Detail.</h2>
+      <p data-t="studio_p1">AMpire Games ist ein Indie-Studio. Wir bauen Spiele, die sofort Spaß machen: schnell erklärt, leicht zu spielen und mit genug Tiefe, dass man noch eine Runde dranhängt.</p>
+    </div>
+  </section>
+
+  <section id="kontakt" class="contact">
+    <div class="box">
+      <h2 data-t="contact_h">Feedback, Fragen, Ideen?</h2>
+      <p data-t="contact_p">Schreib uns – wir freuen uns über jede Nachricht, auch über Bugs und Wünsche zum Spiel.</p>
+      <a class="btn green" href="mailto:AMpireGames@gmail.com">AMpireGames@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span class="l"><img src="img/ampire-logo.png" alt="" width="32" height="32">© AMpire Games</span>
+    <span class="links">
+      <a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#privacy" data-t="privacy">Datenschutz</a>
+      <a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#imprint" data-t="imprint">Impressum</a>
+    </span>
+  </footer>
 </div>
 
 <script>
-  // Gerätesprache bestimmt die Fassung; die Wahl wird gemerkt. Ohne JavaScript erscheinen beide untereinander.
+  // Deutsch steht im Markup (auch ohne JavaScript lesbar); die englische Fassung wird eingetauscht.
+  // Gerätesprache bestimmt den Start, die Wahl wird gemerkt (gleicher Schlüssel wie die Rechtsseite).
   (function () {
-    var root = document.documentElement;
+    var EN = {
+      nav_game: 'Game', nav_studio: 'Studio', nav_contact: 'Contact',
+      lead: 'Small games for short sessions: one tap, instant fun. Made by an indie studio with a big thing for explosions.',
+      cta_game: 'Our first game', cta_studio: 'About the studio',
+      badge: 'New · Android',
+      desc: 'You are a zombie in a cannon. Shoot yourself across the battlefield, ram soldiers, turn them into your horde and break through the army’s walls – all with a single tap.',
+      chip1: 'One-tap controls', chip2: 'Fully offline', chip3: 'English & German',
+      soon: 'Coming soon on Google Play',
+      alt1: 'Gameplay: a wall bursts, combo and shockwave', alt2: 'The ice field biome', alt3: 'Mutation cards to choose from', alt4: 'Zombie skins in the Mutation Lab',
+      cap1: 'Four biomes from military base to ice field', cap2: 'Pick a mutation after every wall', cap3: 'Skins, upgrades and new zombie types',
+      steps_h_a: 'Power. Angle.', steps_h_b: 'Fire!',
+      s1h: 'Fire', s1p: 'Set the power and the angle, then your zombie is off on a trip.',
+      s2h: 'Infect', s2p: 'Every soldier you hit joins your horde. Combos trigger Fever Mode.',
+      s3h: 'Break through', s3p: 'Bigger and bigger walls, every fifth with a bunker and a general.',
+      s4h: 'Mutate', s4p: 'Stack cards, upgrade in the lab and take on a new challenge every day.',
+      studio_eyebrow: 'The studio', studio_h: 'Small, independent, fond of details.',
+      studio_p1: 'AMpire Games is an indie studio. We build games that are fun right away: quick to explain, easy to play and deep enough to make you go for one more run.',
+      contact_h: 'Feedback, questions, ideas?', contact_p: 'Write to us – we love every message, including bug reports and wishes for the game.',
+      privacy: 'Privacy Policy', imprint: 'Imprint'
+    };
+    var root = document.documentElement, DE = {};
+    var nodes = document.querySelectorAll('[data-t]'), alts = document.querySelectorAll('[data-t-alt]');
+    nodes.forEach(function (n) { DE[n.getAttribute('data-t')] = n.textContent; });
+    alts.forEach(function (n) { DE[n.getAttribute('data-t-alt')] = n.getAttribute('alt'); });
+    var show = function (l) {
+      var d = l === 'de' ? DE : EN;
+      nodes.forEach(function (n) { n.textContent = d[n.getAttribute('data-t')]; });
+      alts.forEach(function (n) { n.setAttribute('alt', d[n.getAttribute('data-t-alt')]); });
+      root.lang = l;
+      document.querySelectorAll('[data-set]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === l ? 'true' : 'false'); });
+      try { localStorage.setItem('legal-lang', l); } catch (e) {}
+    };
+    document.querySelectorAll('[data-set]').forEach(function (b) {
+      b.addEventListener('click', function () { show(b.getAttribute('data-set')); });
+    });
     var saved = null;
     try { saved = localStorage.getItem('legal-lang'); } catch (e) {}
-    var show = function (l) { root.setAttribute('data-show', l); root.lang = l; try { localStorage.setItem('legal-lang', l); } catch (e) {} };
-    root.className = 'js';
-    document.getElementById('langs').hidden = false;
-    document.querySelectorAll('[data-set]').forEach(function (a) {
-      a.addEventListener('click', function (ev) { ev.preventDefault(); show(a.getAttribute('data-set')); });
-    });
-    show(saved || (/^de/i.test(navigator.language || '') ? 'de' : 'en'));
+    var lang = saved || (/^de/i.test(navigator.language || '') ? 'de' : 'en');
+    if (lang !== 'de') show(lang);
   })();
 </script>
 </body>
