@@ -11,6 +11,7 @@
 <meta property="og:description" content="Kleine Indie-Spiele für kurze Runden: schnell erklärt, sofort spielbar.">
 <meta property="og:image" content="https://ampiregames.github.io/img/ampire-header.jpg">
 <link rel="icon" type="image/png" href="img/ampire-logo.png">
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -125,10 +126,88 @@
 
   a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
   @media (max-width: 600px) { .deco { opacity: .5; } .sub { letter-spacing: .3em; } }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .key, .step { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .key, .step, nav a::after { transition: none; } }
+
+  /* Animationen – nur wenn das System Bewegung erlaubt */
+  .key.a, .tiles .a { --sd: var(--yellow-d); }
+  .key.m, .tiles .m { --sd: var(--green-d); }
+  .key { --depth: clamp(8px, 1.2vw, 14px); }
+  .tiles div { --depth: 8px; }
+  .btn.yellow { --sd: var(--yellow-d); } .btn.green { --sd: var(--green-d); } .btn.dark { --sd: #14111e; }
+  a.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--sd); }
+  nav a { position: relative; }
+  nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 3px; border-radius: 3px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+  nav a:hover::after { transform: scaleX(1); }
+  .steps-wrap h2 span + span { display: inline-block; }
+  .progress { display: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :root { --spring: cubic-bezier(.34, 1.56, .64, 1); }
+
+    /* Hero-Auftritt */
+    header.top { animation: from-top .6s ease-out both; }
+    .key.a { animation: drop .9s ease-out .1s both, press 6s 2.4s infinite; }
+    .key.m { animation: drop .9s ease-out .25s both, press 6s 2.7s infinite; }
+    .pire { display: inline-block; animation: rise .8s var(--spring) .4s both; }
+    .sub { animation: rise .7s ease-out .6s both; }
+    .sub svg { animation: bob 1.6s ease-in-out infinite; }
+    .sub svg:last-child { animation-delay: .8s; }
+    .lead { animation: rise .7s ease-out .75s both; }
+    .ctas { animation: rise .7s ease-out .9s both; }
+    .deco { animation: pop .7s var(--spring) both, float 5s ease-in-out infinite alternate; }
+    .d1 { animation-delay: .5s, 1.2s; } .d2 { animation-delay: .65s, 1.9s; animation-duration: .7s, 6s; }
+    .d3 { animation-delay: .8s, 1.5s; animation-duration: .7s, 4.5s; } .d4 { animation-delay: .95s, 2.2s; animation-duration: .7s, 7s; }
+
+    /* Kleine Dauerbewegungen */
+    .badge-row img { animation: wobble 4s ease-in-out 2s infinite; }
+    .get .soon { animation: pulse 2.4s ease-out infinite; }
+
+    /* Einblenden beim Scrollen */
+    .js .reveal { transition: opacity .7s ease var(--d, 0s), translate .9s var(--spring) var(--d, 0s), scale .9s var(--spring) var(--d, 0s), rotate .9s var(--spring) var(--d, 0s), transform .3s; }
+    .js .reveal:not(.in) { opacity: 0; translate: 0 48px; }
+    .js .game.reveal:not(.in) { scale: .94; }
+    .js .hero-shot.reveal:not(.in) { translate: 80px 0; rotate: 8deg; }
+    .js .step.reveal:not(.in), .js .chips li.reveal:not(.in) { scale: .8; }
+    .hero-shot:hover { transform: rotate(0) scale(1.02); }
+    .shots figure:hover { transform: translateY(-6px); }
+    .steps-wrap h2.in span + span { animation: boom .7s var(--spring) .35s both; }
+
+    /* Studio-Kacheln fallen herein und drücken sich danach wie Tasten */
+    .js .tiles.reveal:not(.in) { opacity: 1; translate: none; }
+    .js .tiles:not(.in) div { opacity: 0; }
+    .tiles.in .a { animation: drop .9s ease-out both, press 6s 1.6s infinite; }
+    .tiles.in .m { animation: drop .9s ease-out .15s both, press 6s 1.9s infinite; }
+
+    /* Sprachwechsel */
+    .swapping [data-t] { animation: swap .35s ease-out; }
+
+    /* Fortschrittsbalken beim Scrollen */
+    @supports (animation-timeline: scroll()) {
+      .progress { display: block; position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 10; background: linear-gradient(90deg, var(--yellow), var(--green), var(--pink)); transform-origin: 0 50%; animation: grow linear both; animation-timeline: scroll(root); }
+    }
+  }
+
+  @keyframes from-top { from { opacity: 0; translate: 0 -24px; } }
+  @keyframes rise { from { opacity: 0; translate: 0 32px; } }
+  @keyframes drop {
+    0% { opacity: 0; translate: 0 -160px; scale: .9 1.15; }
+    55% { opacity: 1; translate: 0 0; scale: 1.12 .84; }
+    75% { scale: .95 1.06; }
+    100% { translate: 0 0; scale: 1; }
+  }
+  @keyframes press { 0%, 6%, 100% { translate: 0 0; } 3% { translate: 0 var(--depth); box-shadow: 0 0 0 var(--sd); } }
+  @keyframes pop { from { scale: 0; opacity: 0; } }
+  @keyframes float { from { translate: 0 0; } to { translate: 0 -18px; } }
+  @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 6px; } }
+  @keyframes wobble { 0%, 80%, 100% { rotate: 0deg; } 84% { rotate: -10deg; } 88% { rotate: 9deg; } 92% { rotate: -6deg; } 96% { rotate: 3deg; } }
+  @keyframes pulse { 0% { box-shadow: 0 6px 0 #5f9a0a, 0 0 0 0 rgba(166, 255, 46, .55); } 70%, 100% { box-shadow: 0 6px 0 #5f9a0a, 0 0 0 18px rgba(166, 255, 46, 0); } }
+  @keyframes boom { 0% { scale: .4; rotate: -12deg; opacity: 0; } 60% { scale: 1.25; rotate: 6deg; opacity: 1; } 100% { scale: 1; rotate: 0deg; } }
+  @keyframes swap { from { opacity: 0; translate: 0 6px; } }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 </style>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <div class="wrap">
   <header class="top">
     <a class="logo" href="#top"><img src="img/ampire-logo.png" alt="" width="48" height="48">AMpire Games</a>
@@ -268,12 +347,36 @@
       try { localStorage.setItem('legal-lang', l); } catch (e) {}
     };
     document.querySelectorAll('[data-set]').forEach(function (b) {
-      b.addEventListener('click', function () { show(b.getAttribute('data-set')); });
+      b.addEventListener('click', function () {
+        if (root.lang === b.getAttribute('data-set')) return;
+        root.classList.remove('swapping'); void root.offsetWidth; root.classList.add('swapping');
+        show(b.getAttribute('data-set'));
+      });
     });
     var saved = null;
     try { saved = localStorage.getItem('legal-lang'); } catch (e) {}
     var lang = saved || (/^de/i.test(navigator.language || '') ? 'de' : 'en');
     if (lang !== 'de') show(lang);
+  })();
+
+  // Elemente blenden beim Scrollen ein; Geschwister innerhalb einer Gruppe leicht versetzt.
+  (function () {
+    var groups = ['.game', '.hero-shot', '.chips li', '.shots figure', '.steps-wrap h2', '.step', '.tiles', '.studio .txt', '.contact .box'];
+    var els = [];
+    groups.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i * 0.1) + 's');
+        els.push(el);
+      });
+    });
+    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (el) { io.observe(el); });
   })();
 </script>
 </body>
