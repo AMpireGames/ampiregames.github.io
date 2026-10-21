@@ -12,9 +12,7 @@
 <meta property="og:image" content="https://ampiregames.github.io/img/ampire-header.jpg">
 <link rel="icon" type="image/png" href="img/ampire-logo.png">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
   :root { --bg: #1c1829; --card: #262138; --ink: #f6efe3; --soft: #e4dccd; --muted: #bdb5cc; --yellow: #efbb3c; --yellow-d: #b87300; --green: #57d77c; --green-d: #1e9648; --pink: #f472a6; --pink-d: #b0366a; --lime: #a6ff2e; }
   * { box-sizing: border-box; }
@@ -304,8 +302,8 @@
   <footer>
     <span class="l"><img src="img/ampire-logo.png" alt="" width="32" height="32">© AMpire Games</span>
     <span class="links">
-      <a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#privacy" data-t="privacy">Datenschutz</a>
-      <a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html#imprint" data-t="imprint">Impressum</a>
+      <a href="datenschutz.html" data-t="privacy">Datenschutz</a>
+      <a href="impressum.html" data-t="imprint">Impressum</a>
     </span>
   </footer>
 </div>
@@ -344,13 +342,13 @@
       alts.forEach(function (n) { n.setAttribute('alt', d[n.getAttribute('data-t-alt')]); });
       root.lang = l;
       document.querySelectorAll('[data-set]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === l ? 'true' : 'false'); });
-      try { localStorage.setItem('legal-lang', l); } catch (e) {}
     };
     document.querySelectorAll('[data-set]').forEach(function (b) {
       b.addEventListener('click', function () {
         if (root.lang === b.getAttribute('data-set')) return;
         root.classList.remove('swapping'); void root.offsetWidth; root.classList.add('swapping');
         show(b.getAttribute('data-set'));
+        try { localStorage.setItem('legal-lang', root.lang); } catch (e) {}
       });
     });
     var saved = null;

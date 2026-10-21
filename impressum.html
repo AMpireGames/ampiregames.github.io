@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1c1829">
+<link rel="icon" type="image/png" href="img/ampire-logo.png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<title>Impressum / Imprint – AMpire Games</title>
+<style>
+  :root { --bg: #1c1829; --card: #262138; --ink: #f6efe3; --soft: #e4dccd; --muted: #bdb5cc; --yellow: #efbb3c; --green: #57d77c; --pink: #f472a6; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.7 "Nunito", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: var(--green); } a:hover { color: #8af0a5; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 0; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font: 700 22px "Fredoka", sans-serif; }
+  .logo:hover { color: var(--ink); }
+  .logo img { width: 44px; height: 44px; border-radius: 13px; }
+  .langs { display: flex; gap: 4px; background: var(--card); padding: 4px; border-radius: 999px; }
+  .langs button { font: 600 15px "Fredoka", sans-serif; color: var(--ink); background: none; border: 0; padding: 6px 14px; min-height: 36px; border-radius: 999px; cursor: pointer; }
+  .langs button[aria-pressed="true"] { background: var(--yellow); color: var(--bg); }
+  .intro { padding: 40px 0 8px; }
+  .eyebrow { margin: 0; font: 600 15px "Fredoka", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
+  h1 { margin: 8px 0 20px; font: 700 clamp(32px, 6vw, 52px)/1.1 "Fredoka", sans-serif; color: var(--yellow); }
+  section { margin-top: 32px; padding: clamp(22px, 4vw, 40px); border-radius: 28px; background: var(--card); }
+  h3 { margin: 28px 0 6px; font: 600 20px "Fredoka", sans-serif; color: var(--pink); }
+  section > h3:first-child, section > p:first-child + h3 { margin-top: 0; }
+  p { margin: 0 0 12px; color: var(--soft); overflow-wrap: anywhere; }
+  .back { margin-top: 40px; }
+  .js [data-lang] { display: none; } .js[data-show="de"] [data-lang="de"], .js[data-show="en"] [data-lang="en"] { display: block; }
+  [data-lang="en"] { border-top: 3px solid var(--pink); margin-top: 3em; padding-top: 1em; } .js [data-lang="en"] { border: 0; margin: 0; padding: 0; }
+  footer { margin-top: 56px; padding: 28px 0 40px; border-top: 2px solid #2e2840; color: var(--muted); font-size: 15px; text-align: center; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <a class="logo" href="./"><img src="img/ampire-logo.png" alt="" width="44" height="44">AMpire Games</a>
+  <span class="langs" id="langs" role="group" aria-label="Sprache / Language" hidden><button type="button" data-set="de">Deutsch</button><button type="button" data-set="en">English</button></span>
+</header>
+<main class="intro">
+<div data-lang="de" lang="de">
+<p class="eyebrow">AMpire Games</p>
+<h1>Impressum</h1>
+<section>
+<h3>Angaben gemäß § 5 DDG</h3>
+<p>Armin Maghsoudloo<br>Kirchlinder Str. 11<br>44577 Castrop-Rauxel<br>Deutschland</p>
+<h3>Kontakt</h3>
+<p>E-Mail: AMpireGames@gmail.com</p>
+<h3>Haftung für Links</h3>
+<p>Diese Website enthält Links zu externen Seiten, auf deren Inhalte ich keinen Einfluss habe. Für diese fremden Inhalte kann ich keine Gewähr übernehmen; verantwortlich ist stets der jeweilige Anbieter. Gesetzliche Haftungsansprüche bleiben unberührt.</p>
+<h3>Urheberrecht</h3>
+<p>© 2026 Armin Maghsoudloo. Texte, Grafiken und Spiele von AMpire Games unterliegen dem deutschen Urheberrecht. Die Schriften Bungee, Fredoka und Nunito werden lokal ausgeliefert und stehen unter der SIL Open Font License 1.1.</p>
+<h3>Zu den Spielen</h3>
+<p>Datenschutzerklärung und Lizenzhinweise der einzelnen Spiele findest du beim jeweiligen Spiel. Für Zombie Horde: Cannon Commander: <a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html">Datenschutz und Lizenzen</a>.</p>
+</section>
+<p class="back"><a href="./">← Zur Startseite</a></p>
+</div>
+<div data-lang="en" lang="en">
+<p class="eyebrow">AMpire Games</p>
+<h1>Imprint</h1>
+<section>
+<h3>Information pursuant to § 5 DDG (German Digital Services Act)</h3>
+<p>Armin Maghsoudloo<br>Kirchlinder Str. 11<br>44577 Castrop-Rauxel<br>Germany</p>
+<h3>Contact</h3>
+<p>Email: AMpireGames@gmail.com</p>
+<h3>Liability for links</h3>
+<p>This website contains links to external sites whose content I have no influence over. I cannot accept any liability for that third-party content; the respective provider is always responsible. Statutory liability claims remain unaffected.</p>
+<h3>Copyright</h3>
+<p>© 2026 Armin Maghsoudloo. Texts, graphics and games by AMpire Games are subject to German copyright law. The fonts Bungee, Fredoka and Nunito are served locally and licensed under the SIL Open Font License 1.1.</p>
+<h3>About the games</h3>
+<p>The privacy policy and license notices of each game can be found with the respective game. For Zombie Horde: Cannon Commander: <a href="https://ampiregames.github.io/zombie-horde-legal/datenschutz.html">privacy and licenses</a>.</p>
+</section>
+<p class="back"><a href="./">← Back to home</a></p>
+</div>
+</main>
+<footer>© AMpire Games</footer>
+</div>
+<script>
+  // Sprache wie auf der Startseite: Die Wahl wird nur nach einem Klick auf DE/EN gemerkt (Schlüssel „legal-lang“).
+  (function () {
+    var root = document.documentElement;
+    var saved = null;
+    try { saved = localStorage.getItem('legal-lang'); } catch (e) {}
+    var btns = document.querySelectorAll('[data-set]');
+    var show = function (l) {
+      root.setAttribute('data-show', l); root.lang = l;
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === l ? 'true' : 'false'); });
+    };
+    root.className = 'js';
+    document.getElementById('langs').hidden = false;
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        show(b.getAttribute('data-set'));
+        try { localStorage.setItem('legal-lang', b.getAttribute('data-set')); } catch (e) {}
+      });
+    });
+    show(saved || (/^de/i.test(navigator.language || '') ? 'de' : 'en'));
+  })();
+</script>
+</body>
+</html>
